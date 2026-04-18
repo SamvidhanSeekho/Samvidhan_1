@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import Navbar from "./components/Navbar/Navbar";
@@ -42,30 +42,20 @@ import CrosswordGame from "./components/pages/Games/CrossWord/CrossWord";
 import AboutUs from "./components/pages/AboutUs";
 import SignUp from "./components/sign-up";
 import ScrollToTop from "./components/Scrolltotop";
+import CivicsMonopoly from "./components/pages/Games/CivicMonopoly/games/CivicsMonopoly";
+import TrainBalloon from "./components/pages/Games/tainBalloon";
+import ScenarioModeGame from "./components/pages/Games/ScenarioMode"; 
 
-const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate a delay for loading (e.g., API fetch or resources)
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-      const preloader = document.getElementById("preloader");
-      if (preloader) {
-        preloader.style.display = "none";
-      }
-    }, 2000);
-
-    return () => clearTimeout(timer); 
-  }, []);
-
-  
+const AppLayout = () => {
+  const location = useLocation();
+  const isGameFullscreen = ["/games/monopoly", "/games/scenarioMode", "/games/trainBalloon"].some((path) =>
+    location.pathname.startsWith(path)
+  );
 
   return (
-    <Router>
-      <main className="overflow-x-hidden">
-        <Navbar />
-        <main className="text-black bg-white dark:bg-gray-800 dark:text-white">
+    <main className={isGameFullscreen ? "h-screen overflow-hidden" : "overflow-x-hidden"}>
+      {!isGameFullscreen && <Navbar />}
+      <main className={isGameFullscreen ? "h-screen bg-slate-950" : "text-black bg-white dark:bg-gray-800 dark:text-white"}>
         <Routes className="text-black bg-white dark:bg-gray-800 dark:text-white">
           <Route path="/" element={<Hero />} />
           <Route path="/services" element={<Services />} />
@@ -100,19 +90,44 @@ const App = () => {
           <Route path="/translate" element={<GoogleTranslate />} />
           <Route path="/quiz" element={<QuizComponent />} />
           <Route path="/games/word-search" element={<WordSearch />} />
-          <Route path="/games/crossword" element={<CrosswordGame />} />
+          <Route path="/games/monopoly" element={<CivicsMonopoly />} />
+          <Route path="/games/scenarioMode" element={<ScenarioModeGame />} />
+          <Route path="/games/trainBalloon" element={<TrainBalloon />} />
           <Route path="/games/puzzle" element={<PuzzleIntro />} />
           <Route path="/explore/constitution-simplified" element={<ConstitutionSimplified />} />
           <Route path="/games/puzzle/:level" element={<PuzzleGame />} />
           <Route path="/sign-up" element={<SignUp />} />
-          
         </Routes>
-        </main>
-        <ScrollToTop/>
-        <Footer />
-        <Analytics />
-        <SpeedInsights />
       </main>
+      <ScrollToTop/>
+      {!isGameFullscreen && <Footer />}
+      <Analytics />
+      <SpeedInsights />
+    </main>
+  );
+};
+
+const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a delay for loading (e.g., API fetch or resources)
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      const preloader = document.getElementById("preloader");
+      if (preloader) {
+        preloader.style.display = "none";
+      }
+    }, 2000);
+
+    return () => clearTimeout(timer); 
+  }, []);
+
+  
+
+  return (
+    <Router>
+      <AppLayout />
     </Router>
   );
 };

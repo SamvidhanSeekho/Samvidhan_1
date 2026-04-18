@@ -21,7 +21,7 @@ const Footer = () => {
         <div className="grid items-center grid-cols-1 md:items-start md:grid-cols-2 lg:grid-cols-3 gap-14 md:gap-8 md:justify-normal ">
           {/* First Section */}
           <div className="space-y-4 max-w-[400px] flex flex-col items-center md:items-start">
-            <h1 className="text-2xl font-bold text-black dark:text-white">Samvidhan Path</h1>
+            <h1 className="text-2xl font-bold text-black dark:text-white">Samvidhan seekho</h1>
             <img src={logo} alt="logo" className="w-1/4 h-auto" />
             <p>Bringing the Constitution Closer to Every Citizen</p>
           </div>
