@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { setAuthData } from "../utils/authUtils";
 
 
 const SignUp = () => {
@@ -25,6 +26,7 @@ const SignUp = () => {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
+  setError(null);
 
   try {
     const response = await fetch(`${API_BASE_URL}/auth/signup`, {
@@ -45,14 +47,21 @@ const handleSubmit = async (e) => {
       throw new Error(data.message || "Signup failed");
     }
 
-    console.log("User created:", data);
+    if (data.success) {
+      // Auto-login user after signup
+      if (data.token && data.userId && data.email && data.name) {
+        setAuthData(data.token, data.email, data.name, data.userId);
+      }
+      
+      setSuccess(true);
 
-    setSuccess(true);
-
-    setTimeout(() => {
-      setSuccess(false);
-      navigate("/signin");
-    }, 3000);
+      setTimeout(() => {
+        setSuccess(false);
+        navigate("/");
+      }, 2000);
+    } else {
+      throw new Error(data.message || "Signup failed");
+    }
 
   } catch (err) {
     console.error("Signup error:", err);
@@ -83,7 +92,7 @@ return (
         onSubmit={handleSubmit}
         className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg"
       >
-        {error && <p className="text-red-500">{error}</p>}
+        {error && <p className="text-center text-red-500 font-semibold">{error}</p>}
 
         {/* Name */}
         <input

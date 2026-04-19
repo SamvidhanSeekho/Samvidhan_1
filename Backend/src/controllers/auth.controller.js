@@ -40,10 +40,20 @@ export const signup = async (req, res) => {
       password: hashedPassword,
     });
 
+    // Auto-login after signup
+    const token = jwt.sign(
+      { id: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
     res.status(201).json({
       success: true,
       message: "User registered successfully",
-      data: user,
+      token,
+      userId: user._id,
+      name: user.name,
+      email: user.email,
     });
 
   } catch (error) {
@@ -97,6 +107,7 @@ export const signin = async (req, res) => {
       });
     }
 
+    console.log("JWT_SECRET being used:", process.env.JWT_SECRET);
     const token = jwt.sign(
       { id: user._id },
       process.env.JWT_SECRET,
@@ -125,6 +136,7 @@ export const signin = async (req, res) => {
       });
     }
 
+    console.error("Signin error:", error);
     res.status(500).json({
       success: false,
       message: "Server Error",
