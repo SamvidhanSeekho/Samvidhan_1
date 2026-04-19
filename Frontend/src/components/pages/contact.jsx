@@ -152,7 +152,7 @@ const handleSubmit = async (e) => {
           </div>
           {/* Sumit Kumar */}
           <div className="flex flex-col items-center">
-            <img src="" alt="Sumit Kumar" className="w-20 h-20 border-2 border-yellow-400 rounded-full shadow-lg"/>
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQGTriXYIQ45Sw/profile-displayphoto-shrink_200_200/B56Zdwfk22HQAY-/0/1749939016157?e=1778112000&v=beta&t=Dv3eN8N54GtLLCrT4qCFFnCe9_-kxbcfblmkmmTKH_4" alt="Sumit Kumar" className="w-20 h-20 border-2 border-yellow-400 rounded-full shadow-lg"/>
             <span className="mt-2 font-semibold text-center text-gray-800 dark:text-gray-100">Sumit kumar</span>
             <span className="text-xs text-center text-gray-500 dark:text-gray-400">Co-lead</span>
             <a href="https://www.linkedin.com/in/sumit-kumar-297227268/" target="_blank" rel="noopener noreferrer">
@@ -161,7 +161,7 @@ const handleSubmit = async (e) => {
           </div>
           {/* Rahwar Rizwi */}
           <div className="flex flex-col items-center">
-            <img src="" alt="Rahwar Rizwi" className="w-20 h-20 border-2 border-yellow-400 rounded-full shadow-lg"/>
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQEdSDvQvADj8g/profile-displayphoto-shrink_200_200/B56Zd0j2VTG0AY-/0/1750007245251?e=1778112000&v=beta&t=2eExtFiA4MAUDT3_SHu3zko26vZVTgKlBTizlHaH6rU" alt="Rahwar Rizwi" className="w-20 h-20 border-2 border-yellow-400 rounded-full shadow-lg"/>
             <span className="mt-2 font-semibold text-center text-gray-800 dark:text-gray-100">Rahwar Rizwi</span>
             <span className="text-xs text-center text-gray-500 dark:text-gray-400">Designer</span>
             <a href="https://www.linkedin.com/in/rahwar-rizwi-745187340/" target="_blank" rel="noopener noreferrer">
@@ -170,7 +170,7 @@ const handleSubmit = async (e) => {
           </div>
           {/* Nikhil Singh */}
           <div className="flex flex-col items-center">
-            <img src="" alt="NIkhil Singh" className="w-20 h-20 border-2 border-yellow-400 rounded-full shadow-lg"/>
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQHjovV0LG01kQ/profile-displayphoto-scale_200_200/B56Zjshd8YIAAg-/0/1756314855522?e=1778112000&v=beta&t=ex5OdXGOhVCwWzXL1D9A8HgFGZ9O2A2AbG_17ot7e7A" alt="NIkhil Singh" className="w-20 h-20 border-2 border-yellow-400 rounded-full shadow-lg"/>
             <span className="mt-2 font-semibold text-center text-gray-800 dark:text-gray-100">Nikhil Singh</span>
             <span className="text-xs text-center text-gray-500 dark:text-gray-400">Researcher</span>
             <a href="https://www.linkedin.com/in/nikhil-singh-857714251/" target="_blank" rel="noopener noreferrer">

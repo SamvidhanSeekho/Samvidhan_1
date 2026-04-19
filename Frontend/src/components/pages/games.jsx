@@ -51,7 +51,7 @@ const GamesPage = () => {
   ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-orange-200 via-yellow-200 to-yellow-300 lg:h-screen lg:overflow-hidden">
+    <div className="relative min-h-screen overflow-x-hidden bg-gradient-to-br from-orange-200 via-yellow-200 to-yellow-300">
       {/* Animated Circular Background Patterns */}
       <div className="absolute top-0 left-0 z-0 w-full h-full pointer-events-none opacity-10">
         <div className="absolute w-40 h-40 bg-orange-200 rounded-full top-10 left-10 animate-pulse-slow"></div>
@@ -60,8 +60,8 @@ const GamesPage = () => {
         <div className="absolute w-32 h-32 rounded-full bottom-10 right-10 bg-orange-50 animate-pulse-fast"></div>
       </div>
 
-      <div className="relative z-10 mx-auto grid h-full w-full max-w-7xl grid-cols-1 gap-6 px-4 py-6 lg:grid-cols-[minmax(0,1fr)_430px] lg:gap-8 lg:px-6 lg:py-8">
-        <section className="rounded-2xl bg-white/25 p-4 backdrop-blur-sm lg:h-full lg:overflow-y-auto lg:pr-2">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-6 px-4 py-6 lg:grid-cols-[minmax(0,1fr)_430px] lg:gap-8 lg:px-6 lg:py-8">
+        <section className="rounded-2xl bg-white/25 p-4 backdrop-blur-sm lg:pr-2">
           <h1 className="mb-8 text-3xl font-bold text-center text-yellow-900 animate-fade-in md:text-4xl lg:text-left">
             Games
           </h1>
@@ -97,7 +97,7 @@ const GamesPage = () => {
           </div>
         </section>
 
-        <aside className="lg:h-full ">
+        <aside>
           <Leaderboard sidebar />
         </aside>
       </div>
