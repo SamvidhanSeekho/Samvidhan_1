@@ -1,11 +1,19 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 import { createUserService, findUserByEmail } from "../services/auth.service.js";
 
 
 // ✅ SIGNUP
 export const signup = async (req, res) => {
   try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({
+        success: false,
+        message: "Database is unavailable. Please try again shortly.",
+      });
+    }
+
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
@@ -40,6 +48,17 @@ export const signup = async (req, res) => {
 
   } catch (error) {
     console.error(error);
+
+    if (
+      error.name === "MongooseServerSelectionError" ||
+      error.name === "MongoServerSelectionError"
+    ) {
+      return res.status(503).json({
+        success: false,
+        message: "Database is unavailable. Please try again shortly.",
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: "Server Error",
@@ -51,6 +70,13 @@ export const signup = async (req, res) => {
 // ✅ SIGNIN
 export const signin = async (req, res) => {
   try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({
+        success: false,
+        message: "Database is unavailable. Please try again shortly.",
+      });
+    }
+
     const { email, password } = req.body;
 
     const user = await findUserByEmail(email);
@@ -81,12 +107,24 @@ export const signin = async (req, res) => {
       success: true,
       message: "Login successful",
       token,
+      userId: user._id,
       name: user.name,
       email: user.email,
     });
 
   } catch (error) {
     console.error(error);
+
+    if (
+      error.name === "MongooseServerSelectionError" ||
+      error.name === "MongoServerSelectionError"
+    ) {
+      return res.status(503).json({
+        success: false,
+        message: "Database is unavailable. Please try again shortly.",
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: "Server Error",

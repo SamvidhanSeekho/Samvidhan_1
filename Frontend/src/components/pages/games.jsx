@@ -8,6 +8,7 @@ import imagegame4 from "../../assets/game4.png";
 import train from "../../assets/train.png"
 import rights from "../../assets/rights.png"
 import monopoly from "../../assets/monopoly.png"
+import Leaderboard from "../Leaderboard/Leaderboard";
 
 const GamesPage = () => {
   const games = [
@@ -50,7 +51,7 @@ const GamesPage = () => {
   ];
 
   return (
-    <div className="relative min-h-screen p-8 overflow-hidden bg-gradient-to-br from-orange-200 via-yellow-200 to-yellow-300">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-orange-200 via-yellow-200 to-yellow-300 lg:h-screen lg:overflow-hidden">
       {/* Animated Circular Background Patterns */}
       <div className="absolute top-0 left-0 z-0 w-full h-full pointer-events-none opacity-10">
         <div className="absolute w-40 h-40 bg-orange-200 rounded-full top-10 left-10 animate-pulse-slow"></div>
@@ -59,38 +60,46 @@ const GamesPage = () => {
         <div className="absolute w-32 h-32 rounded-full bottom-10 right-10 bg-orange-50 animate-pulse-fast"></div>
       </div>
 
-      <h1 className="relative z-10 mb-8 text-4xl font-bold text-center text-yellow-900 animate-fade-in">
-        Games
-      </h1>
+      <div className="relative z-10 mx-auto grid h-full w-full max-w-7xl grid-cols-1 gap-6 px-4 py-6 lg:grid-cols-[minmax(0,1fr)_430px] lg:gap-8 lg:px-6 lg:py-8">
+        <section className="rounded-2xl bg-white/25 p-4 backdrop-blur-sm lg:h-full lg:overflow-y-auto lg:pr-2">
+          <h1 className="mb-8 text-3xl font-bold text-center text-yellow-900 animate-fade-in md:text-4xl lg:text-left">
+            Games
+          </h1>
 
-      <div className="container relative z-10 grid items-center w-full grid-cols-1 mt-16 gap-14 md:grid-cols-3">
-        {games.map((game, index) => (
-          <motion.div
-            key={index}
-            className="overflow-hidden transition-transform duration-300 ease-in-out transform bg-white rounded-lg shadow-lg hover:scale-105 hover:shadow-xl animate-slide-up"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <img
-              src={game.image}
-              alt={game.title}
-              className="object-cover w-full h-48 transition-all duration-500 transform rounded-t-lg hover:rotate-3"
-            />
-            <div className="p-4">
-              <h2 className="text-xl font-bold text-gray-900">{game.title}</h2>
-              <p className="mt-2 text-sm text-gray-600">{game.description}</p>
-              <div className="flex justify-between mt-4">
-                <a
-                  href={game.link}
-                  className="primary-btn !mt-8 inline-flex items-center gap-4 group text-lg font-semibold "
-                >
-                  Play Now
-                  <MdArrowOutward className="duration-200 group-hover:animate-bounce group-hover:text-lg" />
-                </a>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+          <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            {games.map((game, index) => (
+              <motion.div
+                key={index}
+                className="overflow-hidden transition-transform duration-300 ease-in-out transform bg-white rounded-lg shadow-lg hover:scale-105 hover:shadow-xl animate-slide-up"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <img
+                  src={game.image}
+                  alt={game.title}
+                  className="object-cover w-full h-48 transition-all duration-500 transform rounded-t-lg hover:rotate-3"
+                />
+                <div className="p-4">
+                  <h2 className="text-xl font-bold text-gray-900">{game.title}</h2>
+                  <p className="mt-2 text-sm text-gray-600">{game.description}</p>
+                  <div className="flex justify-between mt-4">
+                    <a
+                      href={game.link}
+                      className="primary-btn !mt-8 inline-flex items-center gap-4 group text-lg font-semibold"
+                    >
+                      Play Now
+                      <MdArrowOutward className="duration-200 group-hover:animate-bounce group-hover:text-lg" />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        <aside className="lg:h-full">
+          <Leaderboard sidebar />
+        </aside>
       </div>
     </div>
   );

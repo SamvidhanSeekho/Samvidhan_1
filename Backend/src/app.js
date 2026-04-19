@@ -2,6 +2,7 @@ import express from "express";
 import contactRoutes from "./routes/contact.routes.js";
 import cors from "cors";
 import authRoutes from "./routes/auth.routes.js";
+import leaderboardRoutes from "./routes/leaderboard.routes.js";
 
 const app = express();
 
@@ -10,5 +11,6 @@ app.use(express.json());
 
 app.use("/api", contactRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/leaderboard", leaderboardRoutes);
 
 export default app;

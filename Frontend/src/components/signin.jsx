@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const SignIn = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api";
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -23,7 +24,7 @@ const SignIn = () => {
   e.preventDefault();
 
   try {
-    const response = await fetch("http://localhost:3000/api/auth/signin", {
+    const response = await fetch(`${API_BASE_URL}/auth/signin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,12 +38,13 @@ const SignIn = () => {
     if (!response.ok) {
       throw new Error(data.message);
     }
-if (data.email && data.name) {
+if (data.email && data.name && data.userId) {
   localStorage.setItem("token", data.token);
   localStorage.setItem("email", data.email);
   localStorage.setItem("name", data.name);
+  localStorage.setItem("userId", data.userId);
 } else {
-  throw new Error("Backend didn't return email/name");
+  throw new Error("Backend didn't return required user details");
 }
 
     navigate("/");
