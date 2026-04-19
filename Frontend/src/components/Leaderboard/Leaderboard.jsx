@@ -150,10 +150,10 @@ const Leaderboard = ({ sidebar = false }) => {
             {/* Table Rows */}
             <div className={sidebar ? "overflow-y-auto" : ""}>
               {leaderboardData
-                .filter((player) => {
-                  const score = activeTab === "weekly" ? player.weeklyScore : player.totalScore;
-                  return score > 0;
-                })
+                // .filter((player) => {
+                //   const score = activeTab === "weekly" ? player.weeklyScore : player.totalScore;
+                //   return score > 0;
+                // })
                 .map((player, index) => (
                 <motion.div
                   key={player._id || index}
@@ -163,7 +163,7 @@ const Leaderboard = ({ sidebar = false }) => {
                   variants={rowVariants}
                 >
                   {/* Rank - visible on all screens */}
-                  <div className="col-span-1 md:col-span-2 text-center font-bold text-2xl md:text-base md:font-bold">
+                  <div className="col-span-1 text-black md:col-span-2 text-center font-bold text-2xl md:text-base md:font-bold">
                     {getMedalIcon(index + 1)}
                   </div>
 

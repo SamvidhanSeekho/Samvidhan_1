@@ -97,7 +97,7 @@ const GamesPage = () => {
           </div>
         </section>
 
-        <aside className="lg:h-full">
+        <aside className="lg:h-full ">
           <Leaderboard sidebar />
         </aside>
       </div>
