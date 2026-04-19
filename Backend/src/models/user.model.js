@@ -15,6 +15,26 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    gameScores: [
+      {
+        gameName: {
+          type: String,
+          enum: ["monopoly", "trainBalloon", "scenarioMode", "quiz", "wordSearch", "puzzle"],
+        },
+        score: {
+          type: Number,
+          default: 0,
+        },
+        playedAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+    totalScore: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

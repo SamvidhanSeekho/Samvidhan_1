@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RxExit } from "react-icons/rx";
+import { saveGameScore } from "../../../utils/scoreService";
 
 // Enhanced Balloon-Train Game with improved visuals and gameplay
 
@@ -236,6 +237,13 @@ export default function TrainBalloon() {
     }
     return () => clearTimeout(comboTimerRef.current);
   }, [combo]);
+
+  // Save score when game ends
+  useEffect(() => {
+    if (!running && (lives === 0 || timeLeft === 0)) {
+      saveGameScore("trainBalloon", score);
+    }
+  }, [running, lives, timeLeft, score]);
 
   const startGame = () => {
     setScore(0);

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { saveGameScore } from "../../../../utils/scoreService";
 
 const CrosswordGame = () => {
   const crosswordGrid = [
@@ -63,6 +64,8 @@ const CrosswordGame = () => {
         }
       }
     }
+    // Save score to leaderboard
+    saveGameScore("crossword", 100);
     alert("Congratulations! You've completed the crossword!");
   };
 

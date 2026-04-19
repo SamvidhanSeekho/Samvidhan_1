@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { saveGameScore, calculateScoreFromMoves } from "../../../utils/scoreService";
 
 const Completion = ({ moves }) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Calculate and save score based on moves
+    const score = calculateScoreFromMoves(moves, 30);
+    saveGameScore("puzzle", score);
+  }, [moves]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-yellow-100">

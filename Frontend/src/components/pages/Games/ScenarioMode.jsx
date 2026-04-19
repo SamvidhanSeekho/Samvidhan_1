@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { RxExit } from "react-icons/rx";
+import { saveGameScore } from "../../../utils/scoreService";
 
 const MAX_STEPS_PER_SCENARIO = 15;
 
@@ -420,6 +421,13 @@ const ScenarioModeGame = () => {
     setSelectedChoiceIndex(null);
     setIsLocked(false);
   }, [currentStepId]);
+
+  // Save score to leaderboard when scenario ends
+  useEffect(() => {
+    if (currentStep?.end) {
+      saveGameScore("scenarioMode", score);
+    }
+  }, [currentStep?.end, score]);
 
   const handleStartScenario = () => {
     const filtered = SCENARIOS.filter((s) => {

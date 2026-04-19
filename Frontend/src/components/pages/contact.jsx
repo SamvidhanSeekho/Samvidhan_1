@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import ImgarImage from "../../assets/Imgar.jpeg";
 
 const ContactUs = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api";
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -24,7 +25,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   try {
-    const response = await fetch("http://localhost:3000/api/contact", {
+    const response = await fetch(`${API_BASE_URL}/contact`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

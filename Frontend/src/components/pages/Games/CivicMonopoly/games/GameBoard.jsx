@@ -11,6 +11,7 @@ import useGameSetupFlow, { getValidatedPlayers } from '../hooks/useGameSetupFlow
 import useGameLog from '../hooks/useGameLog';
 import useTurnEngine from '../hooks/useTurnEngine';
 import { RxExit } from "react-icons/rx";
+import { saveGameScore } from '../../../../../utils/scoreService';
 
 const GameBoard = () => {
     const navigate = useNavigate();
@@ -74,6 +75,13 @@ const GameBoard = () => {
             rollTimeoutRef.current = null;
         }
     }, [players, winner]);
+
+    // Save score to leaderboard when game ends
+    useEffect(() => {
+        if (winner) {
+            saveGameScore("monopoly", winner.score || 0);
+        }
+    }, [winner]);
 
     // Game Start 
     const handleGameStart = ({ players: newPlayers, soundEnabled: sound }) => {

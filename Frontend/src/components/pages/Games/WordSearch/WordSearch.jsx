@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { saveGameScore } from "../../../../utils/scoreService";
 
 const WordSearchGame = () => {
   const wordBank = [
@@ -15,12 +16,26 @@ const WordSearchGame = () => {
   const [wordsToFind, setWordsToFind] = useState([]);
   const [foundWords, setFoundWords] = useState([]);
   const [selectedWord, setSelectedWord] = useState("");
+  const [gameSaved, setGameSaved] = useState(false);
 
   useEffect(() => {
     const selectedWords = wordBank.sort(() => 0.5 - Math.random()).slice(0, 5);
     setWordsToFind(selectedWords);
     setGrid(generateGrid(10, 10, selectedWords));
   }, []);
+
+  // Check if all words are found and save score
+  useEffect(() => {
+    if (
+      foundWords.length > 0 &&
+      foundWords.length === wordsToFind.length &&
+      !gameSaved
+    ) {
+      saveGameScore("wordSearch", foundWords.length * 20);
+      setGameSaved(true);
+      alert("🎉 Congratulations! You found all the words!");
+    }
+  }, [foundWords, wordsToFind, gameSaved]);
 
   const generateGrid = (rows, cols, words) => {
     const grid = Array(rows)
@@ -99,7 +114,9 @@ const WordSearchGame = () => {
         </button>
       </div>
       <div className="mt-4">
-        <h2>Found Words:</h2>
+        <h2>
+          Found Words: {foundWords.length} / {wordsToFind.length}
+        </h2>
         <ul>
           {foundWords.map((word, index) => (
             <li key={index}>{word}</li>

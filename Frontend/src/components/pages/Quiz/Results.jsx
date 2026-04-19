@@ -1,8 +1,15 @@
 // Quiz/Results.jsx
 
-import React from "react";
+import React, { useEffect } from "react";
+import { saveGameScore } from "../../../utils/scoreService";
 
 const Results = ({ score, total, userProfile }) => {
+  useEffect(() => {
+    // Calculate percentage score and save to leaderboard
+    const percentageScore = Math.round((score / total) * 100);
+    saveGameScore("quiz", percentageScore);
+  }, [score, total]);
+
   return (
     <div className="w-full max-w-2xl p-6 mx-auto space-y-6 text-center bg-white rounded-lg shadow-md">
       <h2 className="text-3xl font-bold text-yellow-500">Quiz Results</h2>
