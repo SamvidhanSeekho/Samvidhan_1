@@ -6,7 +6,7 @@ const Leaderboard = ({ sidebar = false }) => {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("alltime");
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api";
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://samvidhan-1-q8br.onrender.com/api";
 
   const wrapperClasses = sidebar
     ? "w-full h-full"

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getToken, isAuthenticated } from "../../../utils/authUtils";
 
-const API_BASE_URL = "http://localhost:3000/api/blogs";
+const API_BASE_URL = `${import.meta.env.VITE_API_BASE_URL || "https://samvidhan-1-q8br.onrender.com/api"}/blogs`;
 
 // Helper function to get user ID from localStorage
 const getCurrentUserId = () => {
