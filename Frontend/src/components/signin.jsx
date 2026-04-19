@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { setAuthData } from "../utils/authUtils";
 
 
 const SignIn = () => {
@@ -21,6 +22,7 @@ const SignIn = () => {
 
  const handleSubmit = async (e) => {
   e.preventDefault();
+  setError(null);
 
   try {
     const response = await fetch("http://localhost:3000/api/auth/signin", {
@@ -32,20 +34,18 @@ const SignIn = () => {
     });
 
     const data = await response.json();
-    console.log("Login response:", data)
 
     if (!response.ok) {
-      throw new Error(data.message);
+      throw new Error(data.message || "Login failed");
     }
-if (data.email && data.name) {
-  localStorage.setItem("token", data.token);
-  localStorage.setItem("email", data.email);
-  localStorage.setItem("name", data.name);
-} else {
-  throw new Error("Backend didn't return email/name");
-}
 
-    navigate("/");
+    if (data.success && data.token && data.email && data.name && data.userId) {
+      // Store authentication data in localStorage using utility function
+      setAuthData(data.token, data.email, data.name, data.userId);
+      navigate("/");
+    } else {
+      throw new Error("Invalid response from server");
+    }
 
   } catch (err) {
     console.error("Login error:", err);
@@ -66,7 +66,7 @@ if (data.email && data.name) {
           className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-xl"
         >
           {/* Error */}
-          {error && <p className="text-center text-red-500">{error}</p>}
+          {error && <p className="text-center text-red-500 font-semibold">{error}</p>}
 
           {/* Email */}
           <input
