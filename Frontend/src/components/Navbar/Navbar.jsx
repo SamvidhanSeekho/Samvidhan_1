@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../utils/authUtils";
 import samvidhanPathLogo from "../../assets/samvidhanpath.png";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { FaHighlighter, FaTextHeight } from "react-icons/fa";
@@ -100,7 +101,7 @@ const name = localStorage.getItem("name");
 const firstLetter = (name || email || "A").charAt(0).toUpperCase();
 
 const handleLogout = () => {
-  localStorage.clear();
+  logout(); // Use auth utility function
   window.location.href = "/signin";
 };
 
