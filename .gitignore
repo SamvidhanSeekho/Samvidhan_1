@@ -1,0 +1,21 @@
+# Documentation & Setup Files
+UI_AND_AUTH_FIXES.md
+BLOG_SETUP_GUIDE.md
+QUICK_START.md
+TESTING_GUIDE.md
+CONNECTION_ARCHITECTURE.md
+DEBUG_LOCALSTORAGE.js
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Misc
+*.bak
+*.tmp
